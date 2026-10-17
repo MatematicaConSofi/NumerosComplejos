@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Números complejos · Matemática 5.º año</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--turq:#14b8a6;--turq2:#2dd4bf;--cyan:#22d3ee;--deep:#031820;--ink:#e8fbfb;--muted:#9ac7cc;--glass:rgba(255,255,255,.055);--line:rgba(94,234,212,.22);--ok:#4ade80;--bad:#f87171;--ease:cubic-bezier(.22,1,.36,1);--math:'STIX Two Math','Cambria Math',Georgia,serif}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:var(--ink);line-height:1.6;min-height:100vh;overflow-x:hidden;background:radial-gradient(1200px 700px at 85% -10%,#0b4a55,transparent 60%),radial-gradient(900px 600px at -10% 40%,#07323b,transparent 60%),var(--deep);opacity:0;transition:opacity 1.1s var(--ease)}
+body.ready{opacity:1}
+button,input,textarea{font:inherit}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.33;animation:drift 26s ease-in-out infinite alternate;will-change:transform}
+.b1{width:520px;height:520px;background:var(--turq);left:-140px;top:-120px}
+.b2{width:460px;height:460px;background:#0e7490;right:-150px;top:30%;animation-duration:32s}
+.b3{width:380px;height:380px;background:var(--cyan);opacity:.16;left:35%;bottom:-180px;animation-duration:22s}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(80px,60px,0) scale(1.12)}}
+.sym span{position:absolute;font-family:var(--math);color:var(--cyan);opacity:.14;font-size:var(--s);animation:float var(--d) ease-in-out infinite;animation-delay:var(--dl)}
+@keyframes float{0%,100%{transform:translate3d(0,0,0) rotate(0)}50%{transform:translate3d(14px,-26px,0) rotate(12deg)}}
+
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(3,24,32,.72);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;white-space:nowrap}
+.brand-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--turq2),#0e7490);color:#022c33;font-family:var(--math);font-style:italic;font-size:20px;box-shadow:0 0 22px rgba(45,212,191,.45);transition:transform .6s var(--ease)}
+.brand:hover .brand-mark{transform:rotate(-12deg) scale(1.08)}
+.tabs{position:relative;display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;padding:4px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);max-width:100%}
+.tabs::-webkit-scrollbar{display:none}
+.pill{position:absolute;left:0;top:4px;bottom:4px;width:0;border-radius:999px;background:linear-gradient(120deg,rgba(45,212,191,.38),rgba(34,211,238,.18));box-shadow:0 0 18px rgba(34,211,238,.35),inset 0 0 0 1px rgba(94,234,212,.5);transition:transform .6s var(--ease),width .6s var(--ease)}
+.tab{position:relative;z-index:1;display:flex;align-items:center;gap:7px;padding:8px 14px;border:0;background:none;color:var(--muted);font-size:14px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:color .3s,transform .3s var(--ease)}
+.tab:hover{color:var(--ink);transform:translateY(-1px)}
+.tab:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.tab[aria-current="true"]{color:#fff}
+.tab .ic{font-family:var(--math);font-style:italic;color:var(--turq2)}
+.tab .idx{display:none}
+.gbar{height:2px;background:rgba(255,255,255,.06)}
+.gbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--turq),var(--cyan));box-shadow:0 0 10px var(--cyan);transition:width .8s var(--ease)}
+
+main{position:relative;z-index:1;overflow-x:clip}
+.view{display:none;padding:56px 0 110px}
+.view.active{display:block;animation:viewIn .75s var(--ease) both}
+.view.leaving{display:block;animation:viewOut .38s ease-in forwards;pointer-events:none}
+@keyframes viewIn{from{opacity:0;transform:translate3d(0,36px,0) scale(.985);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+@keyframes viewOut{to{opacity:0;transform:translate3d(-30px,0,0) scale(.98);filter:blur(4px)}}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px;position:relative}
+.deco{position:absolute;border-radius:50%;pointer-events:none;filter:blur(40px);opacity:.5;will-change:transform}
+
+[data-reveal]{opacity:0;translate:0 26px;scale:.97;transition:opacity .8s var(--ease),translate .9s var(--ease),scale .9s var(--ease),filter .9s var(--ease);transition-delay:var(--rd,0ms)}
+[data-reveal].in{opacity:1;translate:0 0;scale:1}
+[data-reveal="zoom"]{scale:.82}
+[data-reveal="formula"]{translate:0 14px;scale:.94;filter:blur(5px)}
+[data-reveal="formula"].in{filter:none}
+
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(34,211,238,.06)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.title{font-size:clamp(2.2rem,5.6vw,4.1rem);line-height:1.05;font-weight:800;letter-spacing:-.02em;margin:22px 0 14px;max-width:18ch;background:linear-gradient(120deg,#fff 10%,var(--turq2) 55%,var(--cyan) 92%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.title.sm{font-size:clamp(2rem,4.6vw,3.2rem)}
+.subtitle{color:var(--cyan);font-weight:600;font-size:1.1rem;margin-top:6px}
+.lead{font-size:1.2rem;margin-top:18px;max-width:62ch}
+.p{color:var(--muted);max-width:68ch;margin-top:8px}
+.h2{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:750;margin:72px 0 14px;letter-spacing:-.01em;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.h2 .num{font-family:var(--math);color:var(--turq2);font-size:.8em}
+.h2::before{content:'';width:46px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--turq),var(--cyan));box-shadow:0 0 14px var(--cyan)}
+.h3{font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.muted{color:var(--muted)}
+.hl{color:var(--cyan);font-weight:700}
+.res{color:#7ff7e4;font-weight:700}
+.mathline{font-family:var(--math);font-size:clamp(1.15rem,2.4vw,1.4rem);color:#fff;background:rgba(3,24,32,.6);border:1px dashed rgba(94,234,212,.35);padding:14px 18px;border-radius:14px;margin:14px 0;overflow-x:auto}
+.ex-math{font-family:var(--math);font-size:1.25rem;color:#fff}
+
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;padding-top:30px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;align-items:center}
+
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;border:0;cursor:pointer;font-weight:700;color:#022c33;background:linear-gradient(120deg,var(--turq2),var(--cyan));box-shadow:0 12px 30px -10px rgba(34,211,238,.7),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .35s var(--ease),box-shadow .35s,filter .3s;overflow:hidden;isolation:isolate}
+.btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);transition:transform .9s var(--ease)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 18px 40px -10px rgba(34,211,238,.85)}
+.btn:hover::before{transform:translateX(120%)}
+.btn:active{transform:translateY(1px) scale(.97)}
+.btn:focus-visible{outline:3px solid rgba(34,211,238,.6);outline-offset:3px}
+.btn.ghost{background:rgba(255,255,255,.04);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:rgba(94,234,212,.6)}
+.btn.small{padding:9px 16px;font-size:14px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;filter:grayscale(.4)}
+.btn[disabled]::before{display:none}
+.btn .arrow{transition:transform .35s var(--ease)}
+.btn:hover .arrow{transform:translateX(5px)}
+
+.fhero{text-align:center;padding:44px 22px;border-radius:28px;position:relative;overflow:hidden;margin-top:52px;background:linear-gradient(160deg,rgba(20,184,166,.22),rgba(3,24,32,.5));border:1px solid var(--line);box-shadow:0 30px 80px -30px rgba(20,184,166,.5),inset 0 1px 0 rgba(255,255,255,.08)}
+.shine{position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.12) 50%,transparent 70%);transform:translateX(-100%);animation:shine 6s infinite}
+@keyframes shine{0%,60%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.big{font-family:var(--math);font-size:clamp(2.6rem,7.5vw,5.2rem);font-weight:700;color:#fff;text-shadow:0 0 30px rgba(34,211,238,.55);line-height:1.25;position:relative}
+.part{display:inline-block;cursor:pointer;color:var(--cyan);border-radius:14px;padding:0 8px;transition:background .3s,color .3s,transform .35s var(--ease)}
+.part:hover{background:rgba(34,211,238,.12);transform:translateY(-5px)}
+.part.on{background:rgba(34,211,238,.2);color:#fff;transform:translateY(-4px) scale(1.05)}
+.part:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(34,211,238,.5)}
+.caption{color:var(--muted);margin-top:12px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;position:relative}
+.panel{margin:22px auto 0;max-width:620px;min-height:96px;padding:20px 24px;border-radius:18px;text-align:left;background:linear-gradient(135deg,rgba(45,212,191,.12),rgba(255,255,255,.03));border:1px solid var(--line);position:relative}
+.panel.swap{animation:swapIn .5s var(--ease)}
+.panel strong{color:var(--cyan);font-size:1.05rem}
+.panel p{margin-top:6px}
+@keyframes swapIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+
+.orbit{position:relative;width:min(300px,70vw);aspect-ratio:1;margin:0 auto;display:grid;place-items:center}
+.orbit .ring{position:absolute;inset:0;border-radius:50%;border:1px dashed rgba(94,234,212,.3);animation:spin 22s linear infinite}
+.orbit .ring.r2{inset:14%;border-style:solid;border-color:rgba(34,211,238,.25);animation-duration:14s;animation-direction:reverse}
+.orbit .core{width:46%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#7ff7e4,var(--turq) 55%,#0b3c49);box-shadow:0 0 60px rgba(45,212,191,.55);font-family:var(--math);font-size:clamp(2rem,5vw,3rem);color:#022c33;font-weight:700;animation:breathe 4s ease-in-out infinite}
+.orbit .sat{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--cyan);box-shadow:0 0 16px var(--cyan);top:50%;left:50%;margin:-7px;animation:orbit 9s linear infinite}
+.orbit .sat.s2{animation-duration:6s;background:var(--turq2)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes orbit{from{transform:rotate(0) translateX(150px)}to{transform:rotate(360deg) translateX(150px) rotate(-360deg)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:22px;padding:26px;position:relative;overflow:hidden;transition:transform .35s var(--ease),border-color .4s,box-shadow .4s;transform-style:preserve-3d;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));backdrop-filter:blur(6px)}
+.card:hover{border-color:rgba(45,212,191,.5);box-shadow:0 20px 50px -22px rgba(20,184,166,.5)}
+.card::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(340px circle at var(--mx,50%) var(--my,0%),rgba(45,212,191,.16),transparent 45%)}
+.card:hover::after{opacity:1}
+.badge-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-family:var(--math);font-size:22px;font-style:italic;color:#022c33;background:linear-gradient(135deg,var(--turq2),var(--cyan));box-shadow:0 0 20px rgba(45,212,191,.4);margin-bottom:14px;transition:transform .5s var(--ease)}
+.card:hover .badge-ico{transform:rotate(-8deg) scale(1.08)}
+.note{margin-top:22px;padding:18px 20px;border-radius:16px;border-left:3px solid var(--cyan);background:rgba(34,211,238,.06)}
+.example{margin-top:22px;padding:18px 22px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+.example .lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--turq2);margin-bottom:6px}
+
+.stepper{margin-top:24px;border-radius:22px;padding:22px;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(3,24,32,.55));border:1px solid var(--line)}
+.stepper-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.counter{font-size:13px;color:var(--muted);letter-spacing:.08em}
+.counter b{color:var(--cyan)}
+.dots{display:flex;gap:8px;margin:14px 0 4px;flex-wrap:wrap}
+.dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.14);transition:background .4s,transform .4s var(--ease),box-shadow .4s}
+.dots i.done{background:var(--turq2)}
+.dots i.cur{background:var(--cyan);transform:scale(1.4);box-shadow:0 0 12px var(--cyan)}
+.step-area{min-height:120px;display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.step{padding:14px 18px;border-radius:14px;font-family:var(--math);font-size:1.1rem;background:rgba(255,255,255,.035);border:1px solid rgba(94,234,212,.12);color:var(--muted);transition:color .4s,background .4s,opacity .4s}
+.step.past{opacity:.5}
+.step.now{color:#fff;background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.55);box-shadow:0 0 24px -8px rgba(34,211,238,.6);animation:stepIn .55s var(--ease) both}
+.step .tag{display:block;font-family:var(--math);font-size:12px;letter-spacing:.1em;color:var(--turq2);margin-bottom:4px;text-transform:uppercase}
+@keyframes stepIn{from{opacity:0;transform:translateX(-14px) scale(.98)}to{opacity:1;transform:none}}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.bar{height:6px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:14px}
+.bar i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--turq),var(--cyan));box-shadow:0 0 12px var(--cyan);transition:width .8s var(--ease)}
+
+.practice-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.score{min-width:230px;padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.score .big-n{font-family:var(--math);font-size:2rem;color:#fff}
+.ex{margin-top:26px;padding:26px;border-radius:24px;position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(3,24,32,.5));border:1px solid var(--line);transition:border-color .5s,box-shadow .5s}
+.ex.ok{border-color:rgba(74,222,128,.55);box-shadow:0 0 40px -14px rgba(74,222,128,.55)}
+.ex.bad{animation:shake .5s var(--ease)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+.ex-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.ex-num{font-family:var(--math);font-style:italic;font-size:1.1rem;color:#022c33;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--turq2),var(--cyan))}
+.ex-status{font-size:13px;letter-spacing:.08em;color:var(--muted)}
+.ex-status.ok{color:var(--ok)}
+.ex-status.bad{color:var(--bad)}
+.ex-prompt{margin-top:14px;color:var(--muted)}
+.ex-expr{font-family:var(--math);font-size:clamp(1.4rem,3.6vw,2rem);color:#fff;margin-top:10px;padding:14px 18px;border-radius:14px;background:rgba(3,24,32,.55);border:1px dashed rgba(94,234,212,.3);display:inline-block}
+.fields{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;align-items:flex-end}
+.field{display:flex;flex-direction:column;gap:6px;min-width:180px;flex:1}
+.field label{font-size:13px;color:var(--muted)}
+input[type=text],textarea{width:100%;color:#fff;padding:12px 14px;border-radius:14px;background:rgba(3,24,32,.65);border:1px solid rgba(94,234,212,.28);transition:border-color .3s,box-shadow .3s,background .3s;outline:none}
+input[type=text]{font-size:1.1rem}
+input::placeholder,textarea::placeholder{color:rgba(154,199,204,.45)}
+input:hover,textarea:hover{border-color:rgba(94,234,212,.5)}
+input:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(34,211,238,.18);background:rgba(3,24,32,.85)}
+input:disabled{opacity:.7}
+input.wrong{border-color:var(--bad);box-shadow:0 0 0 4px rgba(248,113,113,.15)}
+input.right{border-color:var(--ok);box-shadow:0 0 0 4px rgba(74,222,128,.15)}
+.ex-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.fb{margin-top:16px;opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease);border-radius:14px}
+.fb:not(:empty){opacity:1;transform:none;padding:14px 16px}
+.fb.ok{background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.4);color:#bbf7d0}
+.fb.bad{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.4);color:#fecaca}
+.hints{margin-top:14px;display:grid;gap:8px}
+.hint{padding:10px 14px;border-radius:12px;font-size:14px;background:rgba(34,211,238,.07);border-left:2px solid var(--cyan);animation:swapIn .5s var(--ease) both}
+.explain{margin-top:14px;padding:16px 18px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--line);animation:swapIn .6s var(--ease) both}
+.explain[hidden]{display:none}
+.explain .mathline{margin:8px 0 0}
+.spark{position:absolute;width:8px;height:8px;border-radius:50%;pointer-events:none;background:var(--c);box-shadow:0 0 10px var(--c);animation:burst .9s var(--ease) forwards}
+@keyframes burst{to{transform:translate(var(--tx),var(--ty)) scale(.2);opacity:0}}
+.summary{margin-top:30px;padding:26px;border-radius:24px;display:none;background:linear-gradient(160deg,rgba(20,184,166,.18),rgba(3,24,32,.5));border:1px solid var(--line)}
+.summary.show{display:block;animation:swapIn .7s var(--ease) both}
+.summary ul{list-style:none;margin-top:12px;display:grid;gap:10px}
+.summary li{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;border-radius:12px;background:rgba(255,255,255,.04)}
+.summary li span:last-child{font-family:var(--math);color:#fff}
+
+.refl-grid{display:grid;gap:18px;margin-top:26px}
+.q{padding:22px;border-radius:20px;background:var(--glass);border:1px solid var(--line);transition:border-color .4s,box-shadow .4s,transform .4s var(--ease)}
+.q:focus-within{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(34,211,238,.12);transform:translateY(-2px)}
+.q.done{border-color:rgba(74,222,128,.45)}
+.q-head{display:flex;gap:14px;align-items:flex-start}
+.q-n{flex:0 0 auto;width:36px;height:36px;border-radius:12px;display:grid;place-items:center;font-family:var(--math);font-style:italic;color:#022c33;background:linear-gradient(135deg,var(--turq2),var(--cyan));transition:transform .5s var(--ease),background .5s}
+.q.done .q-n{background:linear-gradient(135deg,#86efac,var(--ok));transform:rotate(360deg)}
+.q-title{font-weight:650;font-size:1.05rem;padding-top:4px}
+textarea{min-height:90px;margin-top:14px;resize:vertical;padding:14px 16px}
+.q-foot{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:8px}
+.review{margin-top:24px;display:none}
+.review.show{display:block;animation:swapIn .6s var(--ease) both}
+.rev-item{padding:14px 18px;border-radius:14px;background:rgba(255,255,255,.035);border-left:3px solid var(--turq2);margin-top:10px}
+.rev-item b{color:var(--cyan)}
+.rev-item p{margin-top:4px;white-space:pre-wrap;word-break:break-word}
+.final{margin-top:24px;padding:26px;border-radius:24px;text-align:center;display:none;background:linear-gradient(160deg,rgba(74,222,128,.14),rgba(3,24,32,.5));border:1px solid rgba(74,222,128,.4)}
+.final.show{display:block;animation:swapIn .7s var(--ease) both}
+.final h3{font-size:1.5rem;color:#bbf7d0}
+.trophy{font-size:44px;display:inline-block;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.msg{margin-top:14px;font-size:14px;color:var(--cyan);min-height:1.4em}
+
+.conclu{margin-top:26px;padding:34px;border-radius:30px;position:relative;overflow:hidden;background:linear-gradient(150deg,rgba(20,184,166,.28),rgba(7,50,59,.7) 60%,rgba(3,24,32,.9));border:1px solid var(--line);box-shadow:0 40px 90px -40px rgba(20,184,166,.6)}
+.checks{list-style:none;display:grid;gap:12px;margin-top:18px}
+.checks li{display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:14px;background:rgba(3,24,32,.4);border:1px solid rgba(94,234,212,.2);transition:transform .4s var(--ease),border-color .4s}
+.checks li:hover{transform:translateX(6px);border-color:rgba(94,234,212,.55)}
+.tick{flex:0 0 auto;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--turq2),var(--cyan));color:#022c33;font-weight:800;font-size:14px;box-shadow:0 0 14px rgba(34,211,238,.5)}
+.end-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.footer-note{margin-top:40px;text-align:center;color:var(--muted);font-size:13px}
+
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}.grid3{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:720px){
+  .nav-in{padding:10px 12px;gap:10px;flex-wrap:wrap;justify-content:center}
+  .brand{width:100%;justify-content:center}
+  .tabs{margin-left:0;width:100%;justify-content:flex-start}
+  .tab{padding:7px 11px;font-size:13px}
+  .tab .ic{display:none}
+  .tab .idx{display:inline;font-family:var(--math);font-style:italic;color:var(--turq2);margin-right:4px}
+  .view{padding:34px 0 80px}
+  .grid3{grid-template-columns:1fr}
+  .h2{margin:52px 0 12px}
+  .card,.ex,.stepper,.summary,.conclu,.final{padding:20px}
+  .btn{width:100%;justify-content:center}
+  .field{min-width:100%}
+  .fhero{padding:30px 16px}
+  .orbit .sat{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  [data-reveal]{opacity:1!important;translate:none!important;scale:none!important;filter:none!important}
+  .blob,.sym,.grid-lines{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="sym" id="sym"></div>
+</div>
+
+<header class="nav">
+  <div class="nav-in">
+    <div class="brand"><div class="brand-mark">i</div></div>
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Secciones">
+      <div class="pill" id="pill"></div>
+      <button class="tab" role="tab" data-go="inicio" aria-current="true"><span class="ic">ℂ</span><span class="idx">1</span>Inicio</button>
+      <button class="tab" role="tab" data-go="operaciones" aria-current="false"><span class="ic">+</span><span class="idx">2</span>Operaciones</button>
+      <button class="tab" role="tab" data-go="practica" aria-current="false"><span class="ic">✎</span><span class="idx">3</span>Práctica</button>
+      <button class="tab" role="tab" data-go="reflexion" aria-current="false"><span class="ic">?</span><span class="idx">4</span>Reflexión</button>
+      <button class="tab" role="tab" data-go="conclusion" aria-current="false"><span class="ic">★</span><span class="idx">5</span>Conclusión</button>
+    </nav>
+  </div>
+  <div class="gbar"><i id="gbar"></i></div>
+</header>
+
+<main>
+
+<!-- 1. INICIO -->
+<section class="view active" id="v-inicio" aria-label="Inicio y conceptos">
+  <div class="deco" style="width:340px;height:340px;background:var(--turq);right:-120px;top:120px"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="kicker" data-reveal><span class="dot"></span>Matemática · 5.º año</span>
+        <h1 class="title" data-reveal style="--rd:80ms">Números complejos: una nueva forma de resolver problemas</h1>
+        <p class="subtitle" data-reveal style="--rd:160ms">Matemática · 5.º año de secundaria.</p>
+        <p class="lead" data-reveal style="--rd:260ms">¡Bienvenidos a nuestra página web sobre números complejos!</p>
+        <p class="p" data-reveal style="--rd:340ms">En este espacio vamos a aprender qué son los números complejos, cómo se representan algebraicamente y cuáles son sus operaciones básicas. La idea es comprender los conceptos principales mediante explicaciones sencillas y ejemplos.</p>
+        <div class="cta-row" data-reveal style="--rd:440ms">
+          <button class="btn" data-go="operaciones">Comenzar a aprender <span class="arrow">→</span></button>
+          <button class="btn ghost" data-go="practica">Ir directo a practicar</button>
+        </div>
+      </div>
+      <div data-reveal="zoom" style="--rd:200ms">
+        <div class="orbit" aria-hidden="true">
+          <div class="ring"></div><div class="ring r2"></div>
+          <div class="sat"></div><div class="sat s2"></div>
+          <div class="core">z</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fhero" data-reveal="formula" style="--rd:120ms">
+      <div class="shine"></div>
+      <div class="big" aria-label="z igual a a más b i">
+        z = <span class="part" data-part="a" tabindex="0" role="button">a</span> +
+        <span class="part" data-part="b" tabindex="0" role="button">b</span><span class="part" data-part="i" tabindex="0" role="button">i</span>
+      </div>
+      <div class="caption">Tocá o pasá el cursor sobre a, b o i</div>
+      <div class="panel" id="partPanel" aria-live="polite">
+        <strong>Elegí un componente</strong>
+        <p>Al seleccionar <span class="hl">a</span>, <span class="hl">b</span> o <span class="hl">i</span> aparece aquí una explicación de ese componente.</p>
+      </div>
+    </div>
+
+    <h2 class="h2" data-reveal><span class="num">01</span>¿Qué son los números complejos?</h2>
+    <p class="p" data-reveal>Los números complejos son números que tienen una parte real y una parte imaginaria. Se representan generalmente con la letra <span class="hl">z</span> y tienen la siguiente forma:</p>
+    <div class="mathline" data-reveal><strong>z = a + bi</strong></div>
+
+    <div class="grid3">
+      <article class="card" data-reveal data-tilt style="--rd:0ms">
+        <div class="badge-ico">a</div>
+        <h3 class="h3">Parte real</h3>
+        <p class="muted">Es el número que aparece sin la unidad imaginaria.</p>
+      </article>
+      <article class="card" data-reveal data-tilt style="--rd:120ms">
+        <div class="badge-ico">b</div>
+        <h3 class="h3">Coeficiente imaginario</h3>
+        <p class="muted">Es el número que multiplica a la unidad imaginaria <i>i</i>.</p>
+      </article>
+      <article class="card" data-reveal data-tilt style="--rd:240ms">
+        <div class="badge-ico">i</div>
+        <h3 class="h3">Unidad imaginaria</h3>
+        <p class="muted">Cumple que i² = −1.</p>
+      </article>
+    </div>
+
+    <div class="example" data-reveal>
+      <div class="lbl">Ejemplo</div>
+      <p>En el número <span class="ex-math">z = 3 + 2i</span>, la parte real es <span class="res">3</span> y el coeficiente de la parte imaginaria es <span class="res">2</span>.</p>
+    </div>
+    <p class="p" data-reveal style="margin-top:22px">Los números complejos permiten resolver algunas operaciones y ecuaciones que no tienen solución dentro de los números reales.</p>
+
+    <h2 class="h2" data-reveal><span class="num">02</span>La unidad imaginaria</h2>
+    <p class="p" data-reveal>La unidad imaginaria se representa con la letra <span class="hl">i</span> y se define así:</p>
+    <div class="mathline" data-reveal>i = √−1</div>
+    <p class="p" data-reveal>Esto significa que:</p>
+    <div class="mathline" data-reveal>i² = −1</div>
+
+    <div class="example" data-reveal>
+      <div class="lbl">Ejemplo</div>
+      <p>Si queremos calcular <span class="ex-math">√−9</span>, podemos escribir: <span class="ex-math">√−9 = 3i</span></p>
+    </div>
+
+    <div class="stepper" data-stepper="st-unit" data-reveal>
+      <div class="stepper-head"><div class="h3">Procedimiento progresivo</div><div class="counter">Paso <b class="cur">1</b> de <b class="tot">1</b></div></div>
+      <div class="step-area" aria-live="polite"></div>
+      <div class="dots"></div>
+      <div class="bar"><i></i></div>
+      <div class="controls">
+        <button class="btn ghost small" data-act="prev">← Anterior</button>
+        <button class="btn small" data-act="next">Siguiente →</button>
+        <button class="btn ghost small" data-act="reset">↺ Reiniciar</button>
+      </div>
+    </div>
+
+    <div class="note" data-reveal>
+      <strong>Aclaración matemática:</strong> en el contexto de los números complejos, √−9 se interpreta como la raíz cuadrada principal, <span class="res">3i</span>; las soluciones de <span class="ex-math">x² = −9</span> son <span class="ex-math">x = ±3i</span>.
+    </div>
+  </div>
+</section>
+
+<!-- 2. OPERACIONES -->
+<section class="view" id="v-operaciones" aria-label="Explicaciones y operaciones">
+  <div class="deco" style="width:300px;height:300px;background:#0e7490;left:-120px;top:60px"></div>
+  <div class="wrap">
+    <span class="kicker" data-reveal><span class="dot"></span>Sección 2</span>
+    <h2 class="title sm" data-reveal style="--rd:80ms">Explicaciones y operaciones</h2>
+    <p class="lead" data-reveal style="--rd:160ms">Cada operación se muestra paso a paso. Usá los controles para avanzar, retroceder o reiniciar.</p>
+
+    <h2 class="h2" data-reveal><span class="num">2.1</span>Suma</h2>
+    <div class="card" data-reveal data-tilt>
+      <div class="badge-ico">+</div>
+      <p class="muted">Para sumar números complejos, sumamos las partes reales entre sí y las partes imaginarias entre sí.</p>
+      <div class="example"><div class="lbl">Ejemplo</div><div class="ex-math">(3 + 2i) + (1 + 4i)</div></div>
+      <div class="mathline" style="margin-top:14px">Resultado: <span class="res">4 + 6i</span></div>
+      <div class="stepper" data-stepper="st-sum">
+        <div class="stepper-head"><div class="h3">Procedimiento animado</div><div class="counter">Paso <b class="cur">1</b> de <b class="tot">1</b></div></div>
+        <div class="step-area" aria-live="polite"></div>
+        <div class="dots"></div>
+        <div class="bar"><i></i></div>
+        <div class="controls">
+          <button class="btn ghost small" data-act="prev">← Anterior</button>
+          <button class="btn small" data-act="next">Siguiente →</button>
+          <button class="btn ghost small" data-act="reset">↺ Reiniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="h2" data-reveal><span class="num">2.2</span>Resta</h2>
+    <div class="card" data-reveal data-tilt>
+      <div class="badge-ico">−</div>
+      <p class="muted">Para restar números complejos, restamos las partes reales entre sí y las partes imaginarias entre sí.</p>
+      <div class="example"><div class="lbl">Ejemplo</div><div class="ex-math">(5 + 3i) − (2 + i)</div></div>
+      <div class="mathline" style="margin-top:14px">Resultado: <span class="res">3 + 2i</span></div>
+      <div class="stepper" data-stepper="st-sub">
+        <div class="stepper-head"><div class="h3">Procedimiento animado</div><div class="counter">Paso <b class="cur">1</b> de <b class="tot">1</b></div></div>
+        <div class="step-area" aria-live="polite"></div>
+        <div class="dots"></div>
+        <div class="bar"><i></i></div>
+        <div class="controls">
+          <button class="btn ghost small" data-act="prev">← Anterior</button>
+          <button class="btn small" data-act="next">Siguiente →</button>
+          <button class="btn ghost small" data-act="reset">↺ Reiniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="h2" data-reveal><span class="num">2.3</span>Multiplicación</h2>
+    <div class="card" data-reveal data-tilt>
+      <div class="badge-ico">×</div>
+      <p class="muted">Para multiplicar números complejos, aplicamos la propiedad distributiva y recordamos que i² = −1.</p>
+      <div class="example"><div class="lbl">Ejemplo</div><div class="ex-math">(2 + i)(3 + i)</div></div>
+      <div class="mathline" style="margin-top:14px">Resultado: <span class="res">5 + 5i</span></div>
+      <div class="stepper" data-stepper="st-mul">
+        <div class="stepper-head"><div class="h3">Procedimiento animado</div><div class="counter">Paso <b class="cur">1</b> de <b class="tot">1</b></div></div>
+        <div class="step-area" aria-live="polite"></div>
+        <div class="dots"></div>
+        <div class="bar"><i></i></div>
+        <div class="controls">
+          <button class="btn ghost small" data-act="prev">← Anterior</button>
+          <button class="btn small" data-act="next">Siguiente →</button>
+          <button class="btn ghost small" data-act="reset">↺ Reiniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" data-reveal style="margin-top:34px">
+      <strong>Idea clave:</strong> trabajamos igual que con binomios, agrupando términos semejantes. La única regla extra es reemplazar <span class="res">i² por −1</span>.
+    </div>
+    <div class="cta-row" data-reveal><button class="btn" data-go="practica">Practicar con ejercicios <span class="arrow">→</span></button></div>
+  </div>
+</section>
+
+<!-- 3. PRÁCTICA -->
+<section class="view" id="v-practica" aria-label="Práctica interactiva">
+  <div class="deco" style="width:320px;height:320px;background:var(--cyan);opacity:.25;right:-100px;top:40px"></div>
+  <div class="wrap">
+    <div class="practice-head">
+      <div>
+        <span class="kicker" data-reveal><span class="dot"></span>Sección 3</span>
+        <h2 class="title sm" data-reveal style="--rd:80ms">¡Poné a prueba lo que aprendiste!</h2>
+        <p class="lead" data-reveal style="--rd:160ms">Ahora que conocemos los conceptos básicos, vamos a practicar con algunos ejercicios.</p>
+      </div>
+      <div class="score" data-reveal style="--rd:220ms">
+        <div class="muted" style="font-size:13px;letter-spacing:.08em;text-transform:uppercase">Progreso</div>
+        <div class="big-n"><span id="solvedN">0</span> / 4 resueltos</div>
+        <div class="bar"><i id="practiceBar"></i></div>
+      </div>
+    </div>
+
+    <article class="ex" data-reveal data-ex="1">
+      <div class="ex-top"><div class="ex-num">1</div><div class="ex-status" data-status>Pendiente</div></div>
+      <p class="ex-prompt">Identificá la parte real y el coeficiente de la parte imaginaria de:</p>
+      <div class="ex-expr">4 + 7i</div>
+      <div class="fields">
+        <div class="field"><label for="e1re">Parte real</label><input id="e1re" type="text" autocomplete="off" placeholder="Ej.: 4" data-f="re"></div>
+        <div class="field"><label for="e1im">Coeficiente imaginario</label><input id="e1im" type="text" autocomplete="off" placeholder="Ej.: 7" data-f="im"></div>
+      </div>
+      <div class="ex-actions">
+        <button class="btn small" data-check>Verificar</button>
+        <button class="btn ghost small" data-hint>Pista</button>
+        <button class="btn ghost small" data-explain disabled>Ver explicación</button>
+        <button class="btn ghost small" data-retry>Reintentar</button>
+      </div>
+      <div class="hints" data-hints></div>
+      <div class="fb" data-fb role="status"></div>
+      <div class="explain" data-explain-box hidden></div>
+    </article>
+
+    <article class="ex" data-reveal data-ex="2">
+      <div class="ex-top"><div class="ex-num">2</div><div class="ex-status" data-status>Pendiente</div></div>
+      <p class="ex-prompt">Resolvé:</p>
+      <div class="ex-expr">(2 + 3i) + (4 + i)</div>
+      <div class="fields"><div class="field" style="max-width:360px"><label for="e2in">Tu respuesta</label><input id="e2in" type="text" autocomplete="off" placeholder="Ej.: 6 + 4i" data-f="z"></div></div>
+      <div class="ex-actions">
+        <button class="btn small" data-check>Verificar</button>
+        <button class="btn ghost small" data-hint>Pista</button>
+        <button class="btn ghost small" data-explain disabled>Ver explicación</button>
+        <button class="btn ghost small" data-retry>Reintentar</button>
+      </div>
+      <div class="hints" data-hints></div>
+      <div class="fb" data-fb role="status"></div>
+      <div class="explain" data-explain-box hidden></div>
+    </article>
+
+    <article class="ex" data-reveal data-ex="3">
+      <div class="ex-top"><div class="ex-num">3</div><div class="ex-status" data-status>Pendiente</div></div>
+      <p class="ex-prompt">Resolvé:</p>
+      <div class="ex-expr">(6 + 5i) − (2 + 3i)</div>
+      <div class="fields"><div class="field" style="max-width:360px"><label for="e3in">Tu respuesta</label><input id="e3in" type="text" autocomplete="off" placeholder="Ej.: 4 + 2i" data-f="z"></div></div>
+      <div class="ex-actions">
+        <button class="btn small" data-check>Verificar</button>
+        <button class="btn ghost small" data-hint>Pista</button>
+        <button class="btn ghost small" data-explain disabled>Ver explicación</button>
+        <button class="btn ghost small" data-retry>Reintentar</button>
+      </div>
+      <div class="hints" data-hints></div>
+      <div class="fb" data-fb role="status"></div>
+      <div class="explain" data-explain-box hidden></div>
+    </article>
+
+    <article class="ex" data-reveal data-ex="4">
+      <div class="ex-top"><div class="ex-num">4</div><div class="ex-status" data-status>Pendiente</div></div>
+      <p class="ex-prompt">Calculá:</p>
+      <div class="ex-expr">(1 + 2i)(2 + i)</div>
+      <div class="fields"><div class="field" style="max-width:360px"><label for="e4in">Tu respuesta final</label><input id="e4in" type="text" autocomplete="off" placeholder="Ej.: 5i" data-f="z"></div></div>
+      <div class="ex-actions">
+        <button class="btn small" data-check>Verificar</button>
+        <button class="btn ghost small" data-hint>Pista</button>
+        <button class="btn ghost small" data-explain disabled>Ver explicación</button>
+        <button class="btn ghost small" data-retry>Reintentar</button>
+      </div>
+      <div class="hints" data-hints></div>
+      <div class="fb" data-fb role="status"></div>
+      <div class="explain" data-explain-box hidden></div>
+    </article>
+
+    <div class="cta-row" style="margin-top:30px" data-reveal>
+      <button class="btn ghost" id="btnSummary">Ver resumen de ejercicios</button>
+      <button class="btn ghost" id="btnResetPractice">Reiniciar práctica</button>
+    </div>
+    <div class="summary" id="summary" role="region" aria-label="Resumen de ejercicios">
+      <h3 class="h3">Resumen de ejercicios</h3>
+      <p class="muted" id="sumText"></p>
+      <ul id="sumList"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4. REFLEXIÓN -->
+<section class="view" id="v-reflexion" aria-label="Autorreflexión">
+  <div class="deco" style="width:280px;height:280px;background:var(--turq);left:-100px;top:200px"></div>
+  <div class="wrap">
+    <span class="kicker" data-reveal><span class="dot"></span>Sección 4</span>
+    <h2 class="title sm" data-reveal style="--rd:80ms">¿Qué aprendimos?</h2>
+    <p class="lead" data-reveal style="--rd:160ms">Después de trabajar con los números complejos, es importante detenernos a pensar en nuestro propio aprendizaje.</p>
+
+    <div class="cta-row" data-reveal style="margin-top:20px">
+      <div style="width:min(420px,80vw)">
+        <div class="muted" style="font-size:13px;margin-bottom:6px"><span id="reflN">0</span> de 6 preguntas completadas</div>
+        <div class="bar"><i id="reflBar"></i></div>
+      </div>
+    </div>
+
+    <div class="refl-grid" id="reflGrid"></div>
+
+    <div class="cta-row" style="margin-top:26px">
+      <button class="btn ghost" id="btnReview">Revisar respuestas</button>
+      <button class="btn" id="btnFinish">Finalizar reflexión</button>
+    </div>
+    <div class="msg" id="reflMsg" aria-live="polite"></div>
+
+    <div class="review" id="review">
+      <h3 class="h3">Tus respuestas</h3>
+      <div id="reviewList"></div>
+    </div>
+
+    <div class="final" id="final" role="status">
+      <div class="trophy">🎓</div>
+      <h3>¡Reflexión completada!</h3>
+      <p class="muted" style="margin-top:8px">Reconocer lo que ya sabés y lo que todavía necesitás repasar es parte esencial de aprender. ¡Muy bien!</p>
+    </div>
+
+    <div class="note" data-reveal style="margin-top:40px">
+      <p>Aprender números complejos nos permitió conocer un conjunto numérico diferente de los que habíamos estudiado. Aunque al principio algunos conceptos pueden parecer difíciles, con ejemplos y práctica podemos comprenderlos mejor.</p>
+      <p style="margin-top:12px">La autorreflexión nos ayuda a reconocer nuestros avances, identificar nuestras dificultades y saber qué necesitamos repasar para seguir aprendiendo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CONCLUSIÓN -->
+<section class="view" id="v-conclusion" aria-label="Conclusión">
+  <div class="deco" style="width:260px;height:260px;background:var(--cyan);opacity:.2;right:10%;top:80px"></div>
+  <div class="wrap">
+    <span class="kicker" data-reveal><span class="dot"></span>Sección 5</span>
+    <h2 class="title sm" data-reveal style="--rd:80ms">Lo que nos llevamos de este aprendizaje</h2>
+
+    <div class="conclu" data-reveal="zoom">
+      <p class="lead" style="margin-top:0">Los números complejos son una herramienta importante de la matemática porque amplían las posibilidades de resolver ecuaciones y representar cantidades.</p>
+      <p class="p" style="max-width:none">A través de esta página, repasamos su definición, la unidad imaginaria y algunas operaciones básicas. Lo más importante es comprender los procedimientos y practicar para ganar confianza.</p>
+      <h3 class="h3" style="margin-top:26px">Resumen de conocimientos trabajados</h3>
+      <ul class="checks">
+        <li data-reveal><span class="tick">✓</span>Identificar la parte real y el coeficiente imaginario.</li>
+        <li data-reveal style="--rd:90ms"><span class="tick">✓</span>Comprender la unidad imaginaria.</li>
+        <li data-reveal style="--rd:180ms"><span class="tick">✓</span>Resolver sumas y restas.</li>
+        <li data-reveal style="--rd:270ms"><span class="tick">✓</span>Resolver multiplicaciones aplicando la propiedad distributiva.</li>
+        <li data-reveal style="--rd:360ms"><span class="tick">✓</span>Reconocer los propios avances y las dificultades.</li>
+      </ul>
+      <div class="end-actions">
+        <button class="btn" data-go="inicio">↑ Volver al inicio</button>
+        <button class="btn ghost" data-go="practica" data-reset-ex>Repetir los ejercicios</button>
+      </div>
+    </div>
+
+    <p class="footer-note" data-reveal>Números complejos · Matemática 5.º año</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var fine = !!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+
+  /* ---------- Fondo ---------- */
+  (function () {
+    var host = $('#sym');
+    if (!host || reduce) return;
+    var chars = ['i', 'ℂ', '√', 'π', '∑', 'z', 'a+bi', '−1', 'Re', 'Im'];
+    for (var k = 0; k < 14; k++) {
+      var s = document.createElement('span');
+      s.textContent = chars[k % chars.length];
+      s.style.left = (Math.random() * 95) + '%';
+      s.style.top = (Math.random() * 95) + '%';
+      s.style.setProperty('--s', (18 + Math.random() * 30) + 'px');
+      s.style.setProperty('--d', (9 + Math.random() * 10) + 's');
+      s.style.setProperty('--dl', (-Math.random() * 10) + 's');
+      host.appendChild(s);
+    }
+  })();
+  requestAnimationFrame(function () { setTimeout(function () { document.body.classList.add('ready'); }, 80); });
+
+  /* ---------- Revelado por scroll ---------- */
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }) : null;
+
+  function prepareReveal(view) {
+    var els = $$('[data-reveal]', view);
+    els.forEach(function (el, idx) {
+      if (!el.style.getPropertyValue('--rd')) el.style.setProperty('--rd', Math.min(idx, 10) * 70 + 'ms');
+      el.classList.remove('in');
+    });
+    if (!io || reduce) { els.forEach(function (el) { el.classList.add('in'); }); return; }
+    setTimeout(function () { els.forEach(function (el) { io.observe(el); }); }, 60);
+  }
+
+  /* ---------- Tilt 3D ---------- */
+  if (fine && !reduce) {
+    document.addEventListener('pointermove', function (e) {
+      var card = e.target.closest && e.target.closest('[data-tilt]');
+      if (!card) return;
+      var r = card.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      card.style.setProperty('--ry', ((px - 0.5) * 7).toFixed(2) + 'deg');
+      card.style.setProperty('--rx', ((0.5 - py) * 6).toFixed(2) + 'deg');
+      card.style.setProperty('--mx', (px * 100) + '%');
+      card.style.setProperty('--my', (py * 100) + '%');
+    });
+    document.addEventListener('pointerout', function (e) {
+      var card = e.target.closest && e.target.closest('[data-tilt]');
+      if (!card || card.contains(e.relatedTarget)) return;
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
+    });
+  }
+
+  /* ---------- Progreso y parallax ---------- */
+  var ORDER = ['inicio', 'operaciones', 'practica', 'reflexion', 'conclusion'];
+  var visited = { inicio: true };
+  var ticking = false;
+
+  function updateTopBar() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    var seen = Object.keys(visited).length / ORDER.length * 100;
+    $('#gbar').style.width = Math.min(100, seen * 0.7 + pct * 0.3).toFixed(1) + '%';
+  }
+
+  function parallax() {
+    ticking = false;
+    if (reduce) return;
+    var y = window.scrollY;
+    $$('.blob').forEach(function (b, idx) {
+      b.style.transform = 'translate3d(0,' + (y * (0.04 + idx * 0.02)) + 'px,0)';
+    });
+    var view = document.querySelector('.view.active');
+    if (view) $$('.deco', view).forEach(function (d, idx) {
+      d.style.transform = 'translate3d(0,' + (y * -0.05 * (idx + 1)) + 'px,0)';
+    });
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(parallax); }
+    updateTopBar();
+  }, { passive: true });
+
+  /* ---------- Navegación ---------- */
+  var current = 'inicio';
+  var busy = false;
+  var tabs = $$('.tab');
+  var pill = $('#pill');
+
+  function movePill(id) {
+    var tab = document.querySelector('.tab[data-go="' + id + '"]');
+    if (!tab || !pill) return;
+    pill.style.width = tab.offsetWidth + 'px';
+    pill.style.transform = 'translateX(' + tab.offsetLeft + 'px)';
+  }
+
+  function setTabs(id) {
+    tabs.forEach(function (t) { t.setAttribute('aria-current', t.getAttribute('data-go') === id ? 'true' : 'false'); });
+    movePill(id);
+  }
+
+  function activate(target, id) {
+    current = id;
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    prepareReveal(target);
+    if (id === 'practica') refreshPractice();
+    if (id === 'reflexion') refreshReflection();
+    updateTopBar();
+  }
+
+  function go(id) {
+    var target = document.getElementById('v-' + id);
+    if (!target || busy || id === current) return;
+    busy = true;
+    var from = document.getElementById('v-' + current);
+    visited[id] = true;
+    setTabs(id);
+    try { history.replaceState(null, '', '#' + id); } catch (e) { /* ignorar */ }
+    if (!reduce && from) {
+      from.classList.add('leaving');
+      setTimeout(function () {
+        from.classList.remove('active', 'leaving');
+        activate(target, id);
+        busy = false;
+      }, 380);
+    } else {
+      if (from) from.classList.remove('active', 'leaving');
+      activate(target, id);
+      busy = false;
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('[data-go]');
+    if (!btn) return;
+    e.preventDefault();
+    if (btn.hasAttribute('data-reset-ex')) resetPractice();
+    go(btn.getAttribute('data-go'));
+  });
+
+  tabs.forEach(function (t) {
+    t.addEventListener('keydown', function (e) {
+      var idx = ORDER.indexOf(t.getAttribute('data-go'));
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(ORDER[Math.min(ORDER.length - 1, idx + 1)]); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(ORDER[Math.max(0, idx - 1)]); }
+    });
+  });
+
+  window.addEventListener('resize', function () { movePill(current); });
+
+  prepareReveal(document.getElementById('v-inicio'));
+  setTabs('inicio');
+  setTimeout(function () { movePill(current); }, 60);
+  updateTopBar();
+
+  /* ---------- Fórmula interactiva ---------- */
+  var PARTS = {
+    a: { title: 'a · Parte real', text: 'Es el número que aparece sin la unidad imaginaria. En 3 + 2i, <span class="res">a = 3</span>. Si el número es real puro, como 5, entonces b = 0.' },
+    b: { title: 'b · Coeficiente imaginario', text: 'Es el número real que multiplica a i. En 3 + 2i, <span class="res">b = 2</span>. Observá que b es 2, no 2i: la unidad i aparece aparte.' },
+    i: { title: 'i · Unidad imaginaria', text: 'Cumple <span class="res">i² = −1</span>. Gracias a ella podemos escribir √−1 como i y operar con raíces de números negativos.' }
+  };
+  var panel = $('#partPanel');
+  var partEls = $$('.part');
+
+  function showPart(key) {
+    var info = PARTS[key];
+    if (!info) return;
+    partEls.forEach(function (p) { p.classList.toggle('on', p.getAttribute('data-part') === key); });
+    panel.classList.remove('swap');
+    void panel.offsetWidth;
+    panel.innerHTML = '<strong>' + info.title + '</strong><p>' + info.text + '</p>';
+    panel.classList.add('swap');
+  }
+
+  partEls.forEach(function (p) {
+    p.addEventListener('click', function () { showPart(p.getAttribute('data-part')); });
+    p.addEventListener('mouseenter', function () { if (fine) showPart(p.getAttribute('data-part')); });
+    p.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showPart(p.getAttribute('data-part')); }
+    });
+  });
+
+  /* ---------- Pasos a paso ---------- */
+  var STEPS = {
+    'st-unit': [
+      { tag: 'Planteo', html: 'Queremos calcular <b>√−9</b>.' },
+      { tag: 'Separación', html: 'Separamos el signo negativo: √−9 = √(9 · (−1)).' },
+      { tag: 'Propiedad', html: 'Aplicamos √(a·b) = √a · √b: √−9 = √9 · √−1 = 3 · √−1.' },
+      { tag: 'Definición', html: 'Por definición, √−1 = <b>i</b>, entonces √−9 = <span class="res">3i</span>.' },
+      { tag: 'Comprobación', html: '(3i)² = 9 · i² = 9 · (−1) = −9 ✓' }
+    ],
+    'st-sum': [
+      { tag: 'Ejemplo', html: 'Dados (3 + 2i) + (1 + 4i).' },
+      { tag: 'Paso 1 · Agrupación', html: '(3 + 1) + (2i + 4i)' },
+      { tag: 'Paso 2 · Suma', html: '4 + 6i' },
+      { tag: 'Resultado', html: '<span class="res">4 + 6i</span>' }
+    ],
+    'st-sub': [
+      { tag: 'Ejemplo', html: 'Dados (5 + 3i) − (2 + i). El signo − afecta a todo el segundo complejo.' },
+      { tag: 'Paso 1 · Agrupación', html: '(5 − 2) + (3i − i)' },
+      { tag: 'Paso 2 · Resta', html: '3 + 2i' },
+      { tag: 'Resultado', html: '<span class="res">3 + 2i</span>' }
+    ],
+    'st-mul': [
+      { tag: 'Ejemplo', html: 'Dados (2 + i)(3 + i). Aplicamos la propiedad distributiva.' },
+      { tag: 'Paso 1 · Distributiva', html: '2·3 + 2·i + i·3 + i·i = 6 + 2i + 3i + i²' },
+      { tag: 'Paso 2 · Sustitución', html: 'Sumamos términos semejantes y reemplazamos i² por −1: 6 + 5i − 1' },
+      { tag: 'Resultado', html: '<span class="res">5 + 5i</span>' }
+    ]
+  };
+
+  $$('[data-stepper]').forEach(function (box) {
+    var steps = STEPS[box.getAttribute('data-stepper')] || [];
+    var idx = 0;
+    var area = $('.step-area', box), dots = $('.dots', box), bar = $('.bar i', box);
+    var cur = $('.counter .cur', box), tot = $('.counter .tot', box);
+    var prev = $('[data-act="prev"]', box), next = $('[data-act="next"]', box);
+    tot.textContent = steps.length;
+    steps.forEach(function () { dots.appendChild(document.createElement('i')); });
+
+    function render() {
+      area.innerHTML = '';
+      steps.forEach(function (s, k) {
+        if (k > idx) return;
+        var el = document.createElement('div');
+        el.className = 'step' + (k === idx ? ' now' : ' past');
+        el.innerHTML = '<span class="tag">' + s.tag + '</span>' + s.html;
+        area.appendChild(el);
+      });
+      $$('i', dots).forEach(function (d, k) { d.className = k < idx ? 'done' : (k === idx ? 'cur' : ''); });
+      cur.textContent = idx + 1;
+      bar.style.width = ((idx + 1) / steps.length * 100) + '%';
+      prev.disabled = idx === 0;
+      next.disabled = idx === steps.length - 1;
+      next.textContent = idx === steps.length - 1 ? 'Completado ✓' : 'Siguiente →';
+    }
+
+    prev.addEventListener('click', function () { if (idx > 0) { idx--; render(); } });
+    next.addEventListener('click', function () { if (idx < steps.length - 1) { idx++; render(); } });
+    $('[data-act="reset"]', box).addEventListener('click', function () { idx = 0; render(); });
+    render();
+  });
+
+  /* ---------- Práctica ---------- */
+  var EXERCISES = {
+    1: { type: 'pair', re: 4, im: 7,
+      hint: 'La parte real es el número sin i. El coeficiente imaginario es el número que acompaña a i, sin la i.',
+      expl: 'En 4 + 7i, la parte real es <span class="res">4</span> y el coeficiente imaginario es <span class="res">7</span>.' },
+    2: { type: 'complex', re: 6, im: 4,
+      hint: 'Sumá las partes reales (2 + 4) y las partes imaginarias (3i + i).',
+      expl: '(2 + 3i) + (4 + i) = (2 + 4) + (3i + i) = <span class="res">6 + 4i</span>.' },
+    3: { type: 'complex', re: 4, im: 2,
+      hint: 'Restá las partes reales (6 − 2) y las imaginarias (5i − 3i). Cuidado con el signo.',
+      expl: '(6 + 5i) − (2 + 3i) = (6 − 2) + (5i − 3i) = <span class="res">4 + 2i</span>.' },
+    4: { type: 'complex', re: 0, im: 5,
+      hint: 'Aplicá la distributiva: 2 + i + 4i + 2i². Después reemplazá i² por −1.',
+      expl: '2 + i + 4i + 2i² = 2 + 5i − 2 = <span class="res">5i</span>, es decir, 0 + 5i.' }
+  };
+
+  var state = {};
+  for (var k = 1; k <= 4; k++) state[k] = { done: false, attempts: 0, hints: 0 };
+
+  function parseReal(raw) {
+    var s = String(raw).trim().replace(/\s+/g, '').replace(/−/g, '-').replace(',', '.');
+    if (!/^[+-]?(\d+\.?\d*|\.\d+)$/.test(s)) return null;
+    return parseFloat(s);
+  }
+
+  /* Acepta 6+4i, 5i, 0+5i, 5*i, 5·i, -5i, i, 4-7i, 4 */
+  function parseComplex(raw) {
+    var s = String(raw).trim().replace(/\s+/g, '').replace(/−/g, '-').replace(/[·×]/g, '*').replace(/,/g, '.');
+    if (s === '') return null;
+    if (/^[+-]?(\d+\.?\d*|\.\d+)$/.test(s)) return { re: parseFloat(s), im: 0 };
+    if (!/i$/.test(s)) return null;
+    var body = s.slice(0, -1).replace(/\*$/, '');
+    var cut = -1;
+    for (var j = body.length - 1; j > 0; j--) {
+      if (body[j] === '+' || body[j] === '-') { cut = j; break; }
+    }
+    var reStr = cut > 0 ? body.slice(0, cut) : '';
+    var imStr = cut > 0 ? body.slice(cut) : body;
+    var re = reStr === '' ? 0 : parseReal(reStr);
+    var im = (imStr === '' || imStr === '+') ? 1 : (imStr === '-' ? -1 : parseReal(imStr));
+    if (re === null || im === null) return null;
+    return { re: re, im: im };
+  }
+
+  function nearly(a, b) { return Math.abs(a - b) < 1e-9; }
+
+  function setFeedback(card, ok, msg) {
+    var fb = $('[data-fb]', card);
+    card.classList.remove('ok', 'bad');
+    void card.offsetWidth;
+    card.classList.add(ok ? 'ok' : 'bad');
+    fb.className = 'fb ' + (ok ? 'ok' : 'bad');
+    fb.textContent = msg;
+    var st = $('[data-status]', card);
+    st.className = 'ex-status ' + (ok ? 'ok' : 'bad');
+    st.textContent = ok ? 'Correcto ✓' : 'Revisá el procedimiento';
+    if (ok) burst(card);
+  }
+
+  function burst(card) {
+    if (reduce) return;
+    var colors = ['#7ff7e4', '#22d3ee', '#4ade80', '#2dd4bf'];
+    for (var j = 0; j < 14; j++) {
+      var s = document.createElement('span');
+      var ang = j / 14 * Math.PI * 2;
+      var dist = 70 + Math.random() * 40;
+      s.className = 'spark';
+      s.style.left = '50%';
+      s.style.top = '40%';
+      s.style.setProperty('--c', colors[j % colors.length]);
+      s.style.setProperty('--tx', (Math.cos(ang) * dist).toFixed(1) + 'px');
+      s.style.setProperty('--ty', (Math.sin(ang) * dist).toFixed(1) + 'px');
+      card.appendChild(s);
+      setTimeout(removeNode(s), 1000);
+    }
+  }
+
+  function removeNode(el) {
+    return function () { if (el.parentNode) el.parentNode.removeChild(el); };
+  }
+
+  function refreshPractice() {
+    var n = 0;
+    for (var j = 1; j <= 4; j++) if (state[j].done) n++;
+    $('#solvedN').textContent = n;
+    $('#practiceBar').style.width = (n / 4 * 100) + '%';
+  }
+
+  function finishExercise(n, card, msg) {
+    state[n].done = true;
+    setFeedback(card, true, msg);
+    $$('input', card).forEach(function (i) { i.disabled = true; });
+    $('[data-check]', card).disabled = true;
+    $('[data-explain]', card).disabled = false;
+    refreshPractice();
+  }
+
+  function checkExercise(n) {
+    var card = document.querySelector('[data-ex="' + n + '"]');
+    var ex = EXERCISES[n];
+    if (state[n].done) return;
+    state[n].attempts++;
+
+    if (ex.type === 'pair') {
+      var inRe = $('[data-f="re"]', card), inIm = $('[data-f="im"]', card);
+      var vRe = parseReal(inRe.value), vIm = parseReal(inIm.value);
+      if (vRe === null || vIm === null) {
+        setFeedback(card, false, 'Completá los dos campos con números (por ejemplo, 4 y 7).');
+        return;
+      }
+      var okRe = nearly(vRe, ex.re), okIm = nearly(vIm, ex.im);
+      inRe.classList.toggle('right', okRe); inRe.classList.toggle('wrong', !okRe);
+      inIm.classList.toggle('right', okIm); inIm.classList.toggle('wrong', !okIm);
+      if (okRe && okIm) {
+        finishExercise(n, card, 'Muy bien: la parte real es 4 y el coeficiente imaginario es 7.');
+      } else {
+        var where = (!okRe && !okIm) ? 'Ninguno de los dos valores es correcto.'
+          : (!okRe ? 'Revisá la parte real.' : 'Revisá el coeficiente imaginario.');
+        setFeedback(card, false, where + ' Podés volver a intentarlo o pedir una pista.');
+      }
+      return;
+    }
+
+    var input = $('[data-f="z"]', card);
+    var z = parseComplex(input.value);
+    if (!z) {
+      input.classList.remove('right');
+      input.classList.add('wrong');
+      setFeedback(card, false, 'No pude leer la respuesta. Escribila como a + bi, por ejemplo 6 + 4i.');
+      return;
+    }
+    var ok = nearly(z.re, ex.re) && nearly(z.im, ex.im);
+    input.classList.toggle('right', ok);
+    input.classList.toggle('wrong', !ok);
+    if (ok) finishExercise(n, card, 'Excelente, el resultado es correcto.');
+    else setFeedback(card, false, 'Todavía no es correcto. Revisá el procedimiento o pedí una pista.');
+  }
+
+  function showHint(n) {
+    var card = document.querySelector('[data-ex="' + n + '"]');
+    var box = $('[data-hints]', card);
+    if (box.children.length) return;
+    var h = document.createElement('div');
+    h.className = 'hint';
+    h.textContent = 'Pista: ' + EXERCISES[n].hint;
+    box.appendChild(h);
+    state[n].hints++;
+  }
+
+  function showExplain(n) {
+    var card = document.querySelector('[data-ex="' + n + '"]');
+    var box = $('[data-explain-box]', card);
+    if (!state[n].done) {
+      setFeedback(card, false, 'Primero intentá resolverlo. La explicación se habilita al responder correctamente.');
+      return;
+    }
+    box.hidden = false;
+    box.innerHTML = '<strong style="color:var(--cyan)">Explicación</strong><div class="mathline">' + EXERCISES[n].expl + '</div>';
+  }
+
+  function retryExercise(n) {
+    var card = document.querySelector('[data-ex="' + n + '"]');
+    if (state[n].done) return;
+    card.classList.remove('ok', 'bad');
+    $$('input', card).forEach(function (i) { i.value = ''; i.classList.remove('right', 'wrong'); });
+    var fb = $('[data-fb]', card);
+    fb.className = 'fb';
+    fb.textContent = '';
+    var st = $('[data-status]', card);
+    st.className = 'ex-status';
+    st.textContent = 'Pendiente';
+    $$('input', card)[0].focus();
+  }
+
+  function resetPractice() {
+    for (var j = 1; j <= 4; j++) {
+      state[j] = { done: false, attempts: 0, hints: 0 };
+      var card = document.querySelector('[data-ex="' + j + '"]');
+      $$('input', card).forEach(function (i) { i.value = ''; i.disabled = false; i.classList.remove('right', 'wrong'); });
+      $('[data-check]', card).disabled = false;
+      $('[data-explain]', card).disabled = true;
+      $('[data-explain-box]', card).hidden = true;
+      $('[data-hints]', card).innerHTML = '';
+      var fb = $('[data-fb]', card);
+      fb.className = 'fb';
+      fb.textContent = '';
+      card.classList.remove('ok', 'bad');
+      var st = $('[data-status]', card);
+      st.className = 'ex-status';
+      st.textContent = 'Pendiente';
+    }
+    $('#summary').classList.remove('show');
+    refreshPractice();
+  }
+
+  $$('[data-ex]').forEach(function (card) {
+    var n = parseInt(card.getAttribute('data-ex'), 10);
+    $('[data-check]', card).addEventListener('click', function () { checkExercise(n); });
+    $('[data-hint]', card).addEventListener('click', function () { showHint(n); });
+    $('[data-explain]', card).addEventListener('click', function () { showExplain(n); });
+    $('[data-retry]', card).addEventListener('click', function () { retryExercise(n); });
+    $$('input', card).forEach(function (inp) {
+      inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') checkExercise(n); });
+    });
+  });
+
+  $('#btnSummary').addEventListener('click', function () {
+    var solved = 0;
+    var list = $('#sumList');
+    list.innerHTML = '';
+    for (var j = 1; j <= 4; j++) {
+      if (state[j].done) solved++;
+      var li = document.createElement('li');
+      var a = document.createElement('span');
+      a.textContent = 'Ejercicio ' + j + ': ' + (state[j].done ? 'resuelto ✓' : 'pendiente');
+      var b = document.createElement('span');
+      b.textContent = 'Intentos: ' + state[j].attempts + ' · Pistas: ' + state[j].hints;
+      li.appendChild(a);
+      li.appendChild(b);
+      list.appendChild(li);
+    }
+    $('#sumText').textContent = 'Resolviste ' + solved + ' de 4 ejercicios.';
+    $('#summary').classList.add('show');
+  });
+
+  $('#btnResetPractice').addEventListener('click', resetPractice);
+
+  /* ---------- Reflexión (se conserva durante la sesión) ---------- */
+  var QUESTIONS = [
+    '¿Qué aprendí sobre los números complejos?',
+    '¿Puedo diferenciar la parte real de la parte imaginaria?',
+    '¿Qué operación me resultó más fácil?',
+    '¿Qué tema me costó más comprender?',
+    '¿Qué hice para resolver mis dudas?',
+    '¿En qué necesito seguir practicando?'
+  ];
+  var answers = QUESTIONS.map(function () { return ''; });
+  var reflGrid = $('#reflGrid');
+
+  function isAnswered(idx) { return answers[idx].trim().length >= 3; }
+
+  function updateReflProgress() {
+    var n = 0;
+    for (var j = 0; j < QUESTIONS.length; j++) if (isAnswered(j)) n++;
+    $('#reflN').textContent = n;
+    $('#reflBar').style.width = (n / QUESTIONS.length * 100) + '%';
+  }
+
+  function paintQuestion(card, idx) {
+    var ok = isAnswered(idx);
+    card.classList.toggle('done', ok);
+    $('.q-state', card).textContent = ok ? 'Respondida ✓' : 'Sin responder';
+    $('.q-count', card).textContent = answers[idx].length + ' / 600';
+  }
+
+  function buildReflection() {
+    reflGrid.innerHTML = '';
+    QUESTIONS.forEach(function (text, idx) {
+      var card = document.createElement('div');
+      card.className = 'q';
+      card.innerHTML =
+        '<div class="q-head"><div class="q-n">' + (idx + 1) + '</div><div class="q-title"></div></div>' +
+        '<textarea maxlength="600" placeholder="Escribí tu respuesta…" aria-label="Respuesta ' + (idx + 1) + '"></textarea>' +
+        '<div class="q-foot"><span class="q-state"></span><span class="q-count"></span></div>';
+      $('.q-title', card).textContent = text;
+      var ta = $('textarea', card);
+      ta.value = answers[idx];
+      ta.addEventListener('input', function () {
+        answers[idx] = ta.value;
+        paintQuestion(card, idx);
+        updateReflProgress();
+      });
+      reflGrid.appendChild(card);
+      paintQuestion(card, idx);
+    });
+    updateReflProgress();
+  }
+
+  function refreshReflection() {
+    if (!reflGrid.children.length) buildReflection();
+    $$('.q', reflGrid).forEach(function (c, idx) {
+      $('textarea', c).value = answers[idx];
+      paintQuestion(c, idx);
+    });
+    updateReflProgress();
+  }
+
+  $('#btnReview').addEventListener('click', function () {
+    var list = $('#reviewList');
+    list.innerHTML = '';
+    QUESTIONS.forEach(function (q, idx) {
+      var item = document.createElement('div');
+      item.className = 'rev-item';
+      var title = document.createElement('b');
+      title.textContent = (idx + 1) + '. ' + q;
+      var body = document.createElement('p');
+      body.textContent = answers[idx].trim() ? answers[idx] : '(sin respuesta)';
+      item.appendChild(title);
+      item.appendChild(body);
+      list.appendChild(item);
+    });
+    $('#review').classList.add('show');
+    $('#reflMsg').textContent = 'Revisá tus respuestas. Podés editarlas antes de finalizar.';
+  });
+
+  $('#btnFinish').addEventListener('click', function () {
+    var n = 0;
+    for (var j = 0; j < QUESTIONS.length; j++) if (isAnswered(j)) n++;
+    if (n < QUESTIONS.length) {
+      $('#reflMsg').textContent = 'Te faltan ' + (QUESTIONS.length - n) + ' preguntas por responder.';
+      return;
+    }
+    $('#final').classList.add('show');
+    $('#reflMsg').textContent = '';
+  });
+
+  /* Estado inicial de la reflexión */
+  buildReflection();
+
+})();
+</script>
+</body>
+</html>

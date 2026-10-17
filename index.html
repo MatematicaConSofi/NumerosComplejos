@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Números complejos · Matemática 5.º año</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="sym" id="sym"></div>
+</div>
+
+<header class="nav">
+  <div class="nav-in">
+    <div class="brand"><div class="brand-mark">i</div></div>
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Secciones">
+      <div class="pill" id="pill"></div>
+      <button class="tab" role="tab" data-go="inicio" aria-current="true"><span class="ic">ℂ</span><span class="idx">1</span>Inicio</button>
+      <button class="tab" role="tab" data-go="operaciones" aria-current="false"><span class="ic">+</span><span class="idx">2</span>Operaciones</button>
+      <button class="tab" role="tab" data-go="practica" aria-current="false"><span class="ic">✎</span><span class="idx">3</span>Práctica</button>
+      <button class="tab" role="tab" data-go="reflexion" aria-current="false"><span class="ic">?</span><span class="idx">4</span>Reflexión</button>
+      <button class="tab" role="tab" data-go="conclusion" aria-current="false"><span class="ic">★</span><span class="idx">5</span>Conclusión</button>
+    </nav>
+  </div>
+  <div class="gbar"><i id="gbar"></i></div>
+</header>
+
+<main>
+
+<!-- 1. INICIO -->
+<section class="view active" id="v-inicio" aria-label="Inicio y conceptos">
+  <div class="deco" style="width:340px;height:340px;background:var(--turq);right:-120px;top:120px"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="kicker" data-reveal><span class="dot"></span>Matemática · 5.º año</span>
+        <h1 class="title" data-reveal style="--rd:80ms">Números complejos: una nueva forma de resolver problemas</h1>
+        <p class="subtitle" data-reveal style="--rd:160ms">Matemática · 5.º año de secundaria.</p>
+        <p class="lead" data-reveal style="--rd:260ms">¡Bienvenidos a nuestra página web sobre números complejos!</p>
+        <p class="p" data-reveal style="--rd:340ms">En este espacio vamos a aprender qué son los números complejos, cómo se representan algebraicamente y cuáles son sus operaciones básicas. La idea es comprender los conceptos principales mediante explicaciones sencillas y ejemplos.</p>
+        <div class="cta-row" data-reveal style="--rd:440ms">
+          <button class="btn" data-go="operaciones">Comenzar a aprender <span class="arrow">→</span></button>
+          <button class="btn ghost" data-go="practica">Ir directo a practicar</button>
+        </div>
+      </div>
+      <div data-reveal="zoom" style="--rd:200ms">
+        <div class="orbit" aria-hidden="true">
+          <div class="ring"></div><div class="ring r2"></div>
+          <div class="sat"></div><div class="sat s2"></div>
+          <div class="core">z</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fhero" data-reveal="formula" style="--rd:120ms">
+      <div class="shine"></div>
+      <div class="big" aria-label="z igual a a más b i">
+        z = <span class="part" data-part="a" tabindex="0" role="button">a</span> +
+        <span class="part" data-part="b" tabindex="0" role="button">b</span><span class="part" data-part="i" tabindex="0" role="button">i</span>
+      </div>
+      <div class="caption">Tocá o pasá el cursor sobre a, b o i</div>
+      <div class="panel" id="partPanel" aria-live="polite">
+        <strong>Elegí un componente</strong>
+        <p>Al seleccionar <span class="hl">a</span>, <span class="hl">b</span> o <span class="hl">i</span> aparece aquí una explicación de ese componente.</p>
+      </div>
+    </div>
+
+    <h2 class="h2" data-reveal><span class="num">01</span>¿Qué son los números complejos?</h2>
+    <p class="p" data-reveal>Los números complejos son números que tienen una parte real y una parte imaginaria. Se representan generalmente con la letra <span class="hl">z</span> y tienen la siguiente forma:</p>
+    <div class="mathline" data-reveal><strong>z = a + bi</strong></div>
+
+    <div class="grid3">
+      <article class="card" data-reveal data-tilt style="--rd:0ms">
+        <div class="badge-ico">a</div>
+        <h3 class="h3">Parte real</h3>
+        <p class="muted">Es el número que aparece sin la unidad imaginaria.</p>
+      </article>
+      <article class="card" data-reveal data-tilt style="--rd:120ms">
+        <div class="badge-ico">b</div>
+        <h3 class="h3">Coeficiente imaginario</h3>
+        <p class="muted">Es el número que multiplica a la unidad imaginaria <i>i</i>.</p>
+      </article>
+      <article class="card" data-reveal data-tilt style="--rd:240ms">
+        <div class="badge-ico">i</div>
+        <h3 class="h3">Unidad imaginaria</h3>
+        <p class="muted">Cumple que i² = −1.</p>
+      </article>
+    </div>
+
+    <div class="example" data-reveal>
+      <div class="lbl">Ejemplo</div>
+      <p>En el número <span class="ex-math">z = 3 + 2i</span>, la parte real es <span class="res">3</span> y el coeficiente de la parte imaginaria es <span class="res">2</span>.</p>
+    </div>
+    <p class="p" data-reveal style="margin-top:22px">Los números complejos permiten resolver algunas operaciones y ecuaciones que no tienen solución dentro de los números reales.</p>
+
+    <h2 class="h2" data-reveal><span class="num">02</span>La unidad imaginaria</h2>
+    <p class="p" data-reveal>La unidad imaginaria se representa con la letra <span class="hl">i</span> y se define así:</p>
+    <div class="mathline" data-reveal>i = √−1</div>
+    <p class="p" data-reveal>Esto significa que:</p>
+    <div class="mathline" data-reveal>i² = −1</div>
+
+    <div class="example" data-reveal>
+      <div class="lbl">Ejemplo</div>
+      <p>Si queremos calcular <span class="ex-math">√−9</span>, podemos escribir: <span class="ex-math">√−9 = 3i</span></p>
+    </div>
+
+    <div class="stepper" data-stepper="st-unit" data-reveal>
+      <div class="stepper-head"><div class="h3">Procedimiento progresivo</div><div class="counter">Paso <b class="cur">1</b> de <b class="tot">1</b></div></div>
+      <div class="step-area" aria-live="polite"></div>
+      <div class="dots"></div>
+      <div class="bar"><i></i></div>
+      <div class="controls">
+        <button class="btn ghost small" data-act="prev">← Anterior</button>
+        <button class="btn small" data-act="next">Siguiente →</button>
+        <button class="btn ghost small" data-act="reset">↺ Reiniciar</button>
+      </div>
+    </div>
+
+    <div class="note" data-reveal>
+      <strong>Aclaración matemática:</strong> en el contexto de los números complejos, √−9 se interpreta como la raíz cuadrada principal, <span class="res">3i</span>; las soluciones de <span class="ex-math">x² = −9</span> son <span class="ex-math">x = ±3i</span>.
+    </div>
+  </div>
+</section>
+
+<!-- 2. OPERACIONES -->
+<section class="view" id="v-operaciones" aria-label="Explicaciones y operaciones">
+  <div class="deco" style="width:300px;height:300px;background:#0e7490;left:-120px;top:60px"></div>
+  <div class="wrap">
+    <span class="kicker" data-reveal><span class="dot"></span>Sección 2</span>
+    <h2 class="title sm" data-reveal style="--rd:80ms">Explicaciones y operaciones</h2>
+    <p class="lead" data-reveal style="--rd:160ms">Cada operación se muestra paso a paso. Usá los controles para avanzar, retroceder o reiniciar.</p>
+
+    <h2 class="h2" data-reveal><span class="num">2.1</span>Suma</h2>
+    <div class="card" data-reveal data-tilt>
+      <div class="badge-ico">+</div>
+      <p class="muted">Para sumar números complejos, sumamos las partes reales entre sí y las partes imaginarias entre sí.</p>
+      <div class="example"><div class="lbl">Ejemplo</div><div class="ex-math">(3 + 2i) + (1 + 4i)</div></div>
+      <div class="mathline" style="margin-top:14px">Resultado: <span class="res">4 + 6i</span></div>
+      <div class="stepper" data-stepper="st-sum">
+        <div class="stepper-head"><div class="h3">Procedimiento animado</div><div class="counter">Paso <b class="cur">1</b> de <b class="tot">1</b></div></div>
+        <div class="step-area" aria-live="polite"></div>
+        <div class="dots"></div>
+        <div class="bar"><i></i></div>
+        <div class="controls">
+          <button class="btn ghost small" data-act="prev">← Anterior</button>
+          <button class="btn small" data-act="next">Siguiente →</button>
+          <button class="btn ghost small" data-act="reset">↺ Reiniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="h2" data-reveal><span class="num">2.2</span>Resta</h2>
+    <div class="card" data-reveal data-tilt>
+      <div class="badge-ico">−</div>
+      <p class="muted">Para restar números complejos, restamos las partes reales entre sí y las partes imaginarias entre sí.</p>
+      <div class="example"><div class="lbl">Ejemplo</div><div class="ex-math">(5 + 3i) − (2 + i)</div></div>
+      <div class="mathline" style="margin-top:14px">Resultado: <span class="res">3 + 2i</span></div>
+      <div class="stepper" data-stepper="st-sub">
+        <div class="stepper-head"><div class="h3">Procedimiento animado</div><div class="counter">Paso <b class="cur">1</b> de <b class="tot">1</b></div></div>
+        <div class="step-area" aria-live="polite"></div>
+        <div class="dots"></div>
+        <div class="bar"><i></i></div>
+        <div class="controls">
+          <button class="btn ghost small" data-act="prev">← Anterior</button>
+          <button class="btn small" data-act="next">Siguiente →</button>
+          <button class="btn ghost small" data-act="reset">↺ Reiniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="h2" data-reveal><span class="num">2.3</span>Multiplicación</h2>
+    <div class="card" data-reveal data-tilt>
+      <div class="badge-ico">×</div>
+      <p class="muted">Para multiplicar números complejos, aplicamos la propiedad distributiva y recordamos que i² = −1.</p>
+      <div class="example"><div class="lbl">Ejemplo</div><div class="ex-math">(2 + i)(3 + i)</div></div>
+      <div class="mathline" style="margin-top:14px">Resultado: <span class="res">5 + 5i</span></div>
+      <div class="stepper" data-stepper="st-mul">
+        <div class="stepper-head"><div class="h3">Procedimiento animado</div><div class="counter">Paso <b class="cur">1</b> de <b class="tot">1</b></div></div>
+        <div class="step-area" aria-live="polite"></div>
+        <div class="dots"></div>
+        <div class="bar"><i></i></div>
+        <div class="controls">
+          <button class="btn ghost small" data-act="prev">← Anterior</button>
+          <button class="btn small" data-act="next">Siguiente →</button>
+          <button class="btn ghost small" data-act="reset">↺ Reiniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" data-reveal style="margin-top:34px">
+      <strong>Idea clave:</strong> trabajamos igual que con binomios, agrupando términos semejantes. La única regla extra es reemplazar <span class="res">i² por −1</span>.
+    </div>
+    <div class="cta-row" data-reveal><button class="btn" data-go="practica">Practicar con ejercicios <span class="arrow">→</span></button></div>
+  </div>
+</section>
+
+<!-- 3. PRÁCTICA -->
+<section class="view" id="v-practica" aria-label="Práctica interactiva">
+  <div class="deco" style="width:320px;height:320px;background:var(--cyan);opacity:.25;right:-100px;top:40px"></div>
+  <div class="wrap">
+    <div class="practice-head">
+      <div>
+        <span class="kicker" data-reveal><span class="dot"></span>Sección 3</span>
+        <h2 class="title sm" data-reveal style="--rd:80ms">¡Poné a prueba lo que aprendiste!</h2>
+        <p class="lead" data-reveal style="--rd:160ms">Ahora que conocemos los conceptos básicos, vamos a practicar con algunos ejercicios.</p>
+      </div>
+      <div class="score" data-reveal style="--rd:220ms">
+        <div class="muted" style="font-size:13px;letter-spacing:.08em;text-transform:uppercase">Progreso</div>
+        <div class="big-n"><span id="solvedN">0</span> / 4 resueltos</div>
+        <div class="bar"><i id="practiceBar"></i></div>
+      </div>
+    </div>
+
+    <article class="ex" data-reveal data-ex="1">
+      <div class="ex-top"><div class="ex-num">1</div><div class="ex-status" data-status>Pendiente</div></div>
+      <p class="ex-prompt">Identificá la parte real y el coeficiente de la parte imaginaria de:</p>
+      <div class="ex-expr">4 + 7i</div>
+      <div class="fields">
+        <div class="field"><label for="e1re">Parte real</label><input id="e1re" type="text" autocomplete="off" placeholder="Ej.: 4" data-f="re"></div>
+        <div class="field"><label for="e1im">Coeficiente imaginario</label><input id="e1im" type="text" autocomplete="off" placeholder="Ej.: 7" data-f="im"></div>
+      </div>
+      <div class="ex-actions">
+        <button class="btn small" data-check>Verificar</button>
+        <button class="btn ghost small" data-hint>Pista</button>
+        <button class="btn ghost small" data-explain disabled>Ver explicación</button>
+        <button class="btn ghost small" data-retry>Reintentar</button>
+      </div>
+      <div class="hints" data-hints></div>
+      <div class="fb" data-fb role="status"></div>
+      <div class="explain" data-explain-box hidden></div>
+    </article>
+
+    <article class="ex" data-reveal data-ex="2">
+      <div class="ex-top"><div class="ex-num">2</div><div class="ex-status" data-status>Pendiente</div></div>
+      <p class="ex-prompt">Resolvé:</p>
+      <div class="ex-expr">(2 + 3i) + (4 + i)</div>
+      <div class="fields"><div class="field" style="max-width:360px"><label for="e2in">Tu respuesta</label><input id="e2in" type="text" autocomplete="off" placeholder="Ej.: 6 + 4i" data-f="z"></div></div>
+      <div class="ex-actions">
+        <button class="btn small" data-check>Verificar</button>
+        <button class="btn ghost small" data-hint>Pista</button>
+        <button class="btn ghost small" data-explain disabled>Ver explicación</button>
+        <button class="btn ghost small" data-retry>Reintentar</button>
+      </div>
+      <div class="hints" data-hints></div>
+      <div class="fb" data-fb role="status"></div>
+      <div class="explain" data-explain-box hidden></div>
+    </article>
+
+    <article class="ex" data-reveal data-ex="3">
+      <div class="ex-top"><div class="ex-num">3</div><div class="ex-status" data-status>Pendiente</div></div>
+      <p class="ex-prompt">Resolvé:</p>
+      <div class="ex-expr">(6 + 5i) − (2 + 3i)</div>
+      <div class="fields"><div class="field" style="max-width:360px"><label for="e3in">Tu respuesta</label><input id="e3in" type="text" autocomplete="off" placeholder="Ej.: 4 + 2i" data-f="z"></div></div>
+      <div class="ex-actions">
+        <button class="btn small" data-check>Verificar</button>
+        <button class="btn ghost small" data-hint>Pista</button>
+        <button class="btn ghost small" data-explain disabled>Ver explicación</button>
+        <button class="btn ghost small" data-retry>Reintentar</button>
+      </div>
+      <div class="hints" data-hints></div>
+      <div class="fb" data-fb role="status"></div>
+      <div class="explain" data-explain-box hidden></div>
+    </article>
+
+    <article class="ex" data-reveal data-ex="4">
+      <div class="ex-top"><div class="ex-num">4</div><div class="ex-status" data-status>Pendiente</div></div>
+      <p class="ex-prompt">Calculá:</p>
+      <div class="ex-expr">(1 + 2i)(2 + i)</div>
+      <div class="fields"><div class="field" style="max-width:360px"><label for="e4in">Tu respuesta final</label><input id="e4in" type="text" autocomplete="off" placeholder="Ej.: 5i" data-f="z"></div></div>
+      <div class="ex-actions">
+        <button class="btn small" data-check>Verificar</button>
+        <button class="btn ghost small" data-hint>Pista</button>
+        <button class="btn ghost small" data-explain disabled>Ver explicación</button>
+        <button class="btn ghost small" data-retry>Reintentar</button>
+      </div>
+      <div class="hints" data-hints></div>
+      <div class="fb" data-fb role="status"></div>
+      <div class="explain" data-explain-box hidden></div>
+    </article>
+
+    <div class="cta-row" style="margin-top:30px" data-reveal>
+      <button class="btn ghost" id="btnSummary">Ver resumen de ejercicios</button>
+      <button class="btn ghost" id="btnResetPractice">Reiniciar práctica</button>
+    </div>
+    <div class="summary" id="summary" role="region" aria-label="Resumen de ejercicios">
+      <h3 class="h3">Resumen de ejercicios</h3>
+      <p class="muted" id="sumText"></p>
+      <ul id="sumList"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4. REFLEXIÓN -->
+<section class="view" id="v-reflexion" aria-label="Autorreflexión">
+  <div class="deco" style="width:280px;height:280px;background:var(--turq);left:-100px;top:200px"></div>
+  <div class="wrap">
+    <span class="kicker" data-reveal><span class="dot"></span>Sección 4</span>
+    <h2 class="title sm" data-reveal style="--rd:80ms">¿Qué aprendimos?</h2>
+    <p class="lead" data-reveal style="--rd:160ms">Después de trabajar con los números complejos, es importante detenernos a pensar en nuestro propio aprendizaje.</p>
+
+    <div class="cta-row" data-reveal style="margin-top:20px">
+      <div style="width:min(420px,80vw)">
+        <div class="muted" style="font-size:13px;margin-bottom:6px"><span id="reflN">0</span> de 6 preguntas completadas</div>
+        <div class="bar"><i id="reflBar"></i></div>
+      </div>
+    </div>
+
+    <div class="refl-grid" id="reflGrid"></div>
+
+    <div class="cta-row" style="margin-top:26px">
+      <button class="btn ghost" id="btnReview">Revisar respuestas</button>
+      <button class="btn" id="btnFinish">Finalizar reflexión</button>
+    </div>
+    <div class="msg" id="reflMsg" aria-live="polite"></div>
+
+    <div class="review" id="review">
+      <h3 class="h3">Tus respuestas</h3>
+      <div id="reviewList"></div>
+    </div>
+
+    <div class="final" id="final" role="status">
+      <div class="trophy">🎓</div>
+      <h3>¡Reflexión completada!</h3>
+      <p class="muted" style="margin-top:8px">Reconocer lo que ya sabés y lo que todavía necesitás repasar es parte esencial de aprender. ¡Muy bien!</p>
+    </div>
+
+    <div class="note" data-reveal style="margin-top:40px">
+      <p>Aprender números complejos nos permitió conocer un conjunto numérico diferente de los que habíamos estudiado. Aunque al principio algunos conceptos pueden parecer difíciles, con ejemplos y práctica podemos comprenderlos mejor.</p>
+      <p style="margin-top:12px">La autorreflexión nos ayuda a reconocer nuestros avances, identificar nuestras dificultades y saber qué necesitamos repasar para seguir aprendiendo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CONCLUSIÓN -->
+<section class="view" id="v-conclusion" aria-label="Conclusión">
+  <div class="deco" style="width:260px;height:260px;background:var(--cyan);opacity:.2;right:10%;top:80px"></div>
+  <div class="wrap">
+    <span class="kicker" data-reveal><span class="dot"></span>Sección 5</span>
+    <h2 class="title sm" data-reveal style="--rd:80ms">Lo que nos llevamos de este aprendizaje</h2>
+
+    <div class="conclu" data-reveal="zoom">
+      <p class="lead" style="margin-top:0">Los números complejos son una herramienta importante de la matemática porque amplían las posibilidades de resolver ecuaciones y representar cantidades.</p>
+      <p class="p" style="max-width:none">A través de esta página, repasamos su definición, la unidad imaginaria y algunas operaciones básicas. Lo más importante es comprender los procedimientos y practicar para ganar confianza.</p>
+      <h3 class="h3" style="margin-top:26px">Resumen de conocimientos trabajados</h3>
+      <ul class="checks">
+        <li data-reveal><span class="tick">✓</span>Identificar la parte real y el coeficiente imaginario.</li>
+        <li data-reveal style="--rd:90ms"><span class="tick">✓</span>Comprender la unidad imaginaria.</li>
+        <li data-reveal style="--rd:180ms"><span class="tick">✓</span>Resolver sumas y restas.</li>
+        <li data-reveal style="--rd:270ms"><span class="tick">✓</span>Resolver multiplicaciones aplicando la propiedad distributiva.</li>
+        <li data-reveal style="--rd:360ms"><span class="tick">✓</span>Reconocer los propios avances y las dificultades.</li>
+      </ul>
+      <div class="end-actions">
+        <button class="btn" data-go="inicio">↑ Volver al inicio</button>
+        <button class="btn ghost" data-go="practica" data-reset-ex>Repetir los ejercicios</button>
+      </div>
+    </div>
+
+    <p class="footer-note" data-reveal>Números complejos · Matemática 5.º año</p>
+  </div>
+</section>
+
+</main>
+
+<script src="script.js" defer></script>
+</body>
+</html>
