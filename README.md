@@ -1,16 +1,18 @@
-## Hi there 👋
+# Números complejos
 
-<!--
-**NumerosComplejos/NumerosComplejos** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Sitio educativo interactivo sobre números complejos.
 
-Here are some ideas to get you started:
+## Archivos
+- `index.html`: página principal (archivo que utiliza GitHub Pages).
+- `pagina web.html`: copia de la página principal, conservada con el nombre que ya aparece en el repositorio.
+- `style.css`: estilos visuales.
+- `script.js`: interacciones y ejercicios.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Cómo reemplazar los archivos en GitHub
+1. Abrí el repositorio `NumerosComplejos`.
+2. Entrá en cada archivo que quieras reemplazar.
+3. Elegí el lápiz **Edit** o el menú **Add file → Upload files**.
+4. Subí estos archivos manteniendo exactamente sus nombres.
+5. Confirmá los cambios con **Commit changes**.
+
+Para que GitHub Pages muestre el sitio al entrar al repositorio, dejá `index.html`, `style.css` y `script.js` en la raíz del repositorio. `pagina web.html` es una copia adicional y no es necesaria para publicar el sitio.
